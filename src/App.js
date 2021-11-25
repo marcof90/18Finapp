@@ -1,8 +1,12 @@
 import React, { useState, Fragment, useRef, useEffect} from "react"
 import ContactList from "./components/ContactList"
 import { v4 as uuid } from 'uuid'
+import authHelper from './helpers/auth.helper'
+import { Navigate } from "react-router-dom"
+import Modal from 'react-modal'
 
 export function App(){
+    const [modalOpen, setModalOpen] = useState(false)
     const [contacts, setContacts] = useState([
         // {id: 1, name:'Ana Sofia'},
         // {id: 2, name:'Ana Sofia'},
@@ -44,13 +48,22 @@ export function App(){
     }
 
     // return ( <div>Hola React</div> )
-    return (
+    return (        
+        authHelper.getToken() ?
         <Fragment>
         <ContactList contacts={contacts} checkContact={checkContact} />
         <input ref={contactRef} type="text" placeholder="nuevo contacto"/>
         <button onClick={addContact}>🙍Add</button>
         <button onClick={deleteContact}>🙅‍♀️</button>
         <div> 🙋‍♀️ {contacts.filter((contact) => contact.isSelected).length} contactos seleccionados </div>
+        <button onClick={()=>{setModalOpen(true)}}>Open Modal</button>
+        <Modal isOpen={modalOpen} onRequestClose={()=>setModalOpen(false)}>
+            <h2>Titulo</h2>
+            <p>Cuerpo</p>
+            <button onClick={()=>{setModalOpen(false)}}>Close</button>            
+        </Modal>
         </Fragment>
+        :
+        <Navigate to={'/login'}/>
     )
 }
