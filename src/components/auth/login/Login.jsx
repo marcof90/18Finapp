@@ -27,7 +27,7 @@ export default function Login(){
         navigate('/')
     }
 
-    return (
+    return ( 
         !authHelper.getToken() ?
         <Fragment>
             <h2>Inicio de sesión</h2>

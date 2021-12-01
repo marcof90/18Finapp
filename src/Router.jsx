@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { App } from './App'
 import Login from './components/auth/login/Login'
 import Register from "./components/auth/register/Register";
+import ChatApp from "./components/ChatApp";
 import Account from "./pages/Account";
 import NotFound from "./pages/NotFound";
 
@@ -13,6 +14,7 @@ export default function Router(){
             <Route path={'/login'} element={<Login />} />
             <Route path={'/register'} element={<Register />} />
             <Route path={'/account'} element={<Account/>} />
+            <Route path={'/chat'} element={ <ChatApp /> }  />
             <Route path='*' element={<NotFound />} />
         </Routes> 
     )
